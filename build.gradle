@@ -7,9 +7,17 @@ mainClassName = 'org.cowabunga.hello.HelloWorld'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-jar {
-    baseName = 'Turtle-GO'
-    version =  '0.1.0'
+version = '1.0'
+    
+task fatJar(type: Jar) {
+	manifest {
+        attributes 'Implementation-Title': 'Turtle GO',
+        	'Implementation-Version': version,
+        	'Main-Class': 'com.cowabunga.hello.HelloWorld'
+    }
+    baseName = 'Turtle-GO-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
 
 repositories {

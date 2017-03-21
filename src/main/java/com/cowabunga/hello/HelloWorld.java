@@ -1,4 +1,5 @@
-package org.cowabunga.hello;
+package com.cowabunga.hello;
+
 
 public class HelloWorld {
 

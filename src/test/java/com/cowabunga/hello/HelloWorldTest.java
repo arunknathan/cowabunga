@@ -1,4 +1,4 @@
-package org.cowabunga.hello;
+package com.cowabunga.hello;
 
 import static org.junit.Assert.fail;
 
