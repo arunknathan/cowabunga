@@ -1,6 +1,8 @@
 package com.cowabunga.common;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 import com.cowabunga.entity.Entity;
 
@@ -13,7 +15,7 @@ import com.cowabunga.entity.Entity;
  */
 public class LocationRegistry {
 
-	private HashMap<Coordinate, Entity> obstacleLocationMap = new HashMap<>();
+	private Map<Coordinate, Entity> obstacleLocationMap = new HashMap<>();
 
 	private int minX, minY, maxX, maxY;
 
@@ -23,6 +25,12 @@ public class LocationRegistry {
 		this.minY = minY;
 		this.maxX = maxX;
 		this.maxY = maxY;
+	}
+
+	private Map<Coordinate, Entity> unmodifiableObstacleLocationMap = Collections.unmodifiableMap(obstacleLocationMap);
+
+	public Map<Coordinate, Entity> getUnmodifiableObstacleLocationMap() {
+		return unmodifiableObstacleLocationMap;
 	}
 
 	/**
