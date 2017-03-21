@@ -13,9 +13,9 @@ task fatJar(type: Jar) {
 	manifest {
         attributes 'Implementation-Title': 'Turtle GO',
         	'Implementation-Version': version,
-        	'Main-Class': 'com.cowabunga.hello.HelloWorld'
+        	'Main-Class': 'com.cowabunga.app.console.TurtleGo'
     }
-    baseName = 'Turtle-GO-all'
+    baseName = 'Turtle-Go'
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
 }
