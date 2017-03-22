@@ -62,11 +62,15 @@ public class TurtleGo {
 	public static void readInputStreamAndPrintTurtleLocation(final LocationRegistry LOC_REG, final Turtle TURTLE,
 			final BufferedReader BUF_RDR) throws IOException {
 		char inputCh;
+		boolean acceptableInput;
 		do {
 			inputCh = (char) BUF_RDR.read();
-			TURTLE.move(MoveStep.toMoveStep(inputCh));
-		} while (inputCh == MoveStep.FORWARD.getStepValue() || inputCh == MoveStep.LEFT.getStepValue()
-				|| inputCh == MoveStep.RIGHT.getStepValue());
+			acceptableInput = (inputCh == MoveStep.FORWARD.getStepValue() || inputCh == MoveStep.LEFT.getStepValue()
+					|| inputCh == MoveStep.RIGHT.getStepValue());
+			if (acceptableInput) {
+				TURTLE.move(MoveStep.toMoveStep(inputCh));
+			}
+		} while (acceptableInput);
 	}
 
 	public static void generateObstacles(final int OBSTACLE_COUNT, final int MAX_X, final int MAX_Y,

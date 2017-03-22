@@ -48,10 +48,6 @@ public class Turtle implements Entity {
 	}
 
 	public synchronized boolean move(final MoveStep STEP) {
-		if (STEP == null) {
-			return false;
-		}
-		
 		if ((STEP == MoveStep.FORWARD && facingDirection == Direction.NORTH)
 				|| (STEP == MoveStep.RIGHT && facingDirection == Direction.WEST)
 				|| (STEP == MoveStep.LEFT && facingDirection == Direction.EAST)) {
