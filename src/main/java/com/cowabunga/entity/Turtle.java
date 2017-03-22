@@ -51,11 +51,11 @@ public class Turtle implements Entity {
 		if (STEP == null) {
 			return false;
 		}
+		
 		if ((STEP == MoveStep.FORWARD && facingDirection == Direction.NORTH)
 				|| (STEP == MoveStep.RIGHT && facingDirection == Direction.WEST)
 				|| (STEP == MoveStep.LEFT && facingDirection == Direction.EAST)) {
-			if (locationRegistry
-					.isLocationAvailable(new Coordinate(currentLocation.getX(), currentLocation.getY() + 1))) {
+			if (locationRegistry.moveToLocation(currentLocation, new Coordinate(currentLocation.getX(), currentLocation.getY() + 1), this)) {
 				currentLocation.setY(currentLocation.getY() + 1);
 				facingDirection = Direction.NORTH;
 				return true;
@@ -63,8 +63,7 @@ public class Turtle implements Entity {
 		} else if ((STEP == MoveStep.FORWARD && facingDirection == Direction.EAST)
 				|| (STEP == MoveStep.RIGHT && facingDirection == Direction.NORTH)
 				|| (STEP == MoveStep.LEFT && facingDirection == Direction.SOUTH)) {
-			if (locationRegistry
-					.isLocationAvailable(new Coordinate(currentLocation.getX() + 1, currentLocation.getY()))) {
+			if (locationRegistry.moveToLocation(currentLocation, new Coordinate(currentLocation.getX() + 1, currentLocation.getY()), this)) {
 				currentLocation.setX(currentLocation.getX() + 1);
 				facingDirection = Direction.EAST;
 				return true;
@@ -72,15 +71,13 @@ public class Turtle implements Entity {
 		} else if ((STEP == MoveStep.FORWARD && facingDirection == Direction.WEST)
 				|| (STEP == MoveStep.RIGHT && facingDirection == Direction.SOUTH)
 				|| (STEP == MoveStep.LEFT && facingDirection == Direction.NORTH)) {
-			if (locationRegistry
-					.isLocationAvailable(new Coordinate(currentLocation.getX() - 1, currentLocation.getY()))) {
+			if (locationRegistry.moveToLocation(currentLocation, new Coordinate(currentLocation.getX() - 1, currentLocation.getY()), this)) {
 				currentLocation.setX(currentLocation.getX() - 1);
 				facingDirection = Direction.WEST;
 				return true;
 			}
 		} else {
-			if (locationRegistry
-					.isLocationAvailable(new Coordinate(currentLocation.getX(), currentLocation.getY() - 1))) {
+			if (locationRegistry.moveToLocation(currentLocation, new Coordinate(currentLocation.getX(), currentLocation.getY() - 1), this)) {
 				currentLocation.setY(currentLocation.getY() - 1);
 				facingDirection = Direction.SOUTH;
 				return true;

@@ -3,12 +3,15 @@ package com.cowabunga.app.console;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.util.Map;
 import java.util.Random;
 
 import com.cowabunga.common.Coordinate;
 import com.cowabunga.common.Direction;
 import com.cowabunga.common.LocationRegistry;
 import com.cowabunga.common.MoveStep;
+import com.cowabunga.entity.Entity;
 import com.cowabunga.entity.Obstacle;
 import com.cowabunga.entity.Turtle;
 
@@ -42,7 +45,18 @@ public class TurtleGo {
 			return;
 		}
 
+		System.out.println("TURTLE (x,y facing_direction):");
 		System.out.println(TURTLE.getCurrentLocation() + " " + TURTLE.getFacingDirection().getDirectionValue());
+
+		System.out.println(LOC_REG.getUnmodifiableObstacleLocationMap().keySet().size());
+		printLocationRegistryEntries(LOC_REG, System.out);
+	}
+
+	private static void printLocationRegistryEntries(LocationRegistry lOC_REG, PrintStream out) {
+		Map<Coordinate, Entity> entityLocMap = lOC_REG.getUnmodifiableObstacleLocationMap();
+		for (Coordinate coordinate : entityLocMap.keySet()) {
+				System.out.println(coordinate + " " + entityLocMap.get(coordinate).getClass().getSimpleName());
+		}
 	}
 
 	public static void readInputStreamAndPrintTurtleLocation(final LocationRegistry LOC_REG, final Turtle TURTLE,

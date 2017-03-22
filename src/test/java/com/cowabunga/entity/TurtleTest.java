@@ -12,7 +12,7 @@ import com.cowabunga.common.LocationRegistry;
 import com.cowabunga.common.MoveStep;
 
 @RunWith(JUnit4.class)
-public class TurtleGoTest {
+public class TurtleTest {
 
 	@Test
 	public void testObstacleInWay() {

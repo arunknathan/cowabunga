@@ -1,8 +1,8 @@
 package com.cowabunga.common;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.cowabunga.entity.Entity;
 
@@ -15,7 +15,7 @@ import com.cowabunga.entity.Entity;
  */
 public class LocationRegistry {
 
-	private Map<Coordinate, Entity> obstacleLocationMap = new HashMap<>();
+	private Map<Coordinate, Entity> obstacleLocationMap = new ConcurrentHashMap<>();
 
 	private int minX, minY, maxX, maxY;
 
@@ -63,6 +63,28 @@ public class LocationRegistry {
 	public boolean takeLocation(Coordinate coordinate, Entity entity) {
 		if (isLocationAvailable(coordinate)) {
 			obstacleLocationMap.put(coordinate, entity);
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Makes an entry in the location registry for the given entity for a new
+	 * location.
+	 * 
+	 * @param current
+	 *            {@link Coordinate}
+	 * @param destination
+	 *            {@link Coordinate}
+	 * @param entity
+	 *            {@link Entity}
+	 * @return true - if location occupation was a success<br>
+	 *         false - otherwise
+	 */
+	public boolean moveToLocation(Coordinate current, Coordinate destination, Entity entity) {
+		if (isLocationAvailable(destination)) {
+			obstacleLocationMap.remove(current);
+			obstacleLocationMap.put(destination, entity);
 			return true;
 		}
 		return false;
