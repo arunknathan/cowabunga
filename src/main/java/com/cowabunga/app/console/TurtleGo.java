@@ -1,6 +1,7 @@
 package com.cowabunga.app.console;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
@@ -20,14 +21,19 @@ public class TurtleGo {
 	private static final int INPUT_BUFFER = 1024;
 
 	public static void main(String[] args) {
-		System.out.println("Turtle Go!");
-		System.out.println("Please enter the sequence with [f, l, r]:");
-
 		final int N;
 		try {
 			N = Integer.parseInt(args[0]);
 		} catch (NumberFormatException nfEx) {
-			throw new RuntimeException("Boundary value for location must be an integer.", nfEx);
+			throw new RuntimeException("Please specify an integer value for 'N' as the first command line argument.",
+					nfEx);
+		}
+
+		System.out.println("Turtle Go!");
+		if (args.length >= 2) {
+			System.setIn(new ByteArrayInputStream(args[1].getBytes()));
+		} else {
+			System.out.println("Please enter the sequence with [f, l, r]:");
 		}
 
 		final LocationRegistry LOC_REG = new LocationRegistry(1, 1, N, N);
