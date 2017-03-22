@@ -48,14 +48,14 @@ public class TurtleGo {
 		System.out.println("TURTLE (x,y facing_direction):");
 		System.out.println(TURTLE.getCurrentLocation() + " " + TURTLE.getFacingDirection().getDirectionValue());
 
-		System.out.println(LOC_REG.getUnmodifiableObstacleLocationMap().keySet().size());
+		System.out.println("Location Registry Entries (x,y entity):");
 		printLocationRegistryEntries(LOC_REG, System.out);
 	}
 
 	private static void printLocationRegistryEntries(LocationRegistry lOC_REG, PrintStream out) {
 		Map<Coordinate, Entity> entityLocMap = lOC_REG.getUnmodifiableObstacleLocationMap();
 		for (Coordinate coordinate : entityLocMap.keySet()) {
-				System.out.println(coordinate + " " + entityLocMap.get(coordinate).getClass().getSimpleName());
+			System.out.println(coordinate + " " + entityLocMap.get(coordinate).getClass().getSimpleName());
 		}
 	}
 
