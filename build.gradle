@@ -5,9 +5,9 @@ apply plugin: 'application'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-version = '1.0'
+version = '1.0.1'
     
-task fatJar(type: Jar) {
+task consoleAppJar(type: Jar) {
 	manifest {
         attributes 'Implementation-Title': 'Turtle GO',
         	'Implementation-Version': version,
@@ -16,6 +16,13 @@ task fatJar(type: Jar) {
     baseName = 'Turtle-Go'
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
+}
+
+jar {
+	from(sourceSets.main.output) {
+		include('com/cowabunga/**')
+    	exclude('com/cowabunga/app/**')
+    }
 }
 
 repositories {

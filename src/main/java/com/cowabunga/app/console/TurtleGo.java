@@ -4,17 +4,14 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintStream;
-import java.util.Map;
-import java.util.Random;
 
 import com.cowabunga.common.Coordinate;
 import com.cowabunga.common.Direction;
 import com.cowabunga.common.LocationRegistry;
-import com.cowabunga.common.MoveStep;
-import com.cowabunga.entity.Entity;
-import com.cowabunga.entity.Obstacle;
 import com.cowabunga.entity.Turtle;
+import com.cowabunga.entity.util.impl.LocationRegistryUtilImpl;
+import com.cowabunga.entity.util.impl.ObstacleUtilImpl;
+import com.cowabunga.entity.util.impl.TurtleUtilImpl;
 
 public class TurtleGo {
 
@@ -41,11 +38,11 @@ public class TurtleGo {
 
 		LOC_REG.takeLocation(TURTLE.getCurrentLocation(), TURTLE);
 
-		generateObstacles(N, N, N, LOC_REG);
+		new ObstacleUtilImpl().generateObstacles(N, 1, 1, N, N, LOC_REG);
 
 		final BufferedReader BUF_RDR = new BufferedReader(new InputStreamReader(System.in), INPUT_BUFFER);
 		try {
-			readInputStreamAndPrintTurtleLocation(LOC_REG, TURTLE, BUF_RDR);
+			new TurtleUtilImpl().readInputAndMoveTurtle(LOC_REG, TURTLE, BUF_RDR);
 		} catch (IOException e) {
 			e.printStackTrace();
 			return;
@@ -55,41 +52,7 @@ public class TurtleGo {
 		System.out.println(TURTLE.getCurrentLocation() + " " + TURTLE.getFacingDirection().getDirectionValue());
 
 		System.out.println("Location Registry Entries (x,y entity):");
-		printLocationRegistryEntries(LOC_REG, System.out);
-	}
-
-	private static void printLocationRegistryEntries(LocationRegistry lOC_REG, PrintStream out) {
-		Map<Coordinate, Entity> entityLocMap = lOC_REG.getUnmodifiableObstacleLocationMap();
-		for (Coordinate coordinate : entityLocMap.keySet()) {
-			System.out.println(coordinate + " " + entityLocMap.get(coordinate).getClass().getSimpleName());
-		}
-	}
-
-	public static void readInputStreamAndPrintTurtleLocation(final LocationRegistry LOC_REG, final Turtle TURTLE,
-			final BufferedReader BUF_RDR) throws IOException {
-		char inputCh;
-		boolean acceptableInput;
-		do {
-			inputCh = (char) BUF_RDR.read();
-			acceptableInput = (inputCh == MoveStep.FORWARD.getStepValue() || inputCh == MoveStep.LEFT.getStepValue()
-					|| inputCh == MoveStep.RIGHT.getStepValue());
-			if (acceptableInput) {
-				TURTLE.move(MoveStep.toMoveStep(inputCh));
-			}
-		} while (acceptableInput);
-	}
-
-	public static void generateObstacles(final int OBSTACLE_COUNT, final int MAX_X, final int MAX_Y,
-			LocationRegistry locationRegistry) {
-		final Random RND_NUM_GEN = new Random();
-		Coordinate coordinate;
-		final Obstacle OBSTACLE = new Obstacle();
-		for (int i = 0; i < OBSTACLE_COUNT; i++) {
-			coordinate = new Coordinate(1 + RND_NUM_GEN.nextInt(MAX_X - 1), 1 + RND_NUM_GEN.nextInt(MAX_Y - 1));
-			if (!locationRegistry.takeLocation(coordinate, OBSTACLE)) {
-				i--;
-			}
-		}
+		new LocationRegistryUtilImpl().printLocationRegistryEntries(LOC_REG, System.out);
 	}
 
 }
