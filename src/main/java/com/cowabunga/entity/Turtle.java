@@ -48,33 +48,38 @@ public class Turtle implements Entity {
 	}
 
 	public synchronized boolean move(final MoveStep STEP) {
+		Coordinate temp = null;
 		if ((STEP == MoveStep.FORWARD && facingDirection == Direction.NORTH)
 				|| (STEP == MoveStep.RIGHT && facingDirection == Direction.WEST)
 				|| (STEP == MoveStep.LEFT && facingDirection == Direction.EAST)) {
-			if (locationRegistry.moveToLocation(currentLocation, new Coordinate(currentLocation.getX(), currentLocation.getY() + 1), this)) {
-				currentLocation.setY(currentLocation.getY() + 1);
+			if (locationRegistry.moveToLocation(currentLocation,
+					temp = new Coordinate(currentLocation.x, currentLocation.y + 1), this)) {
+				currentLocation = temp;
 				facingDirection = Direction.NORTH;
 				return true;
 			}
 		} else if ((STEP == MoveStep.FORWARD && facingDirection == Direction.EAST)
 				|| (STEP == MoveStep.RIGHT && facingDirection == Direction.NORTH)
 				|| (STEP == MoveStep.LEFT && facingDirection == Direction.SOUTH)) {
-			if (locationRegistry.moveToLocation(currentLocation, new Coordinate(currentLocation.getX() + 1, currentLocation.getY()), this)) {
-				currentLocation.setX(currentLocation.getX() + 1);
+			if (locationRegistry.moveToLocation(currentLocation,
+					temp = new Coordinate(currentLocation.x + 1, currentLocation.y), this)) {
+				currentLocation = temp;
 				facingDirection = Direction.EAST;
 				return true;
 			}
 		} else if ((STEP == MoveStep.FORWARD && facingDirection == Direction.WEST)
 				|| (STEP == MoveStep.RIGHT && facingDirection == Direction.SOUTH)
 				|| (STEP == MoveStep.LEFT && facingDirection == Direction.NORTH)) {
-			if (locationRegistry.moveToLocation(currentLocation, new Coordinate(currentLocation.getX() - 1, currentLocation.getY()), this)) {
-				currentLocation.setX(currentLocation.getX() - 1);
+			if (locationRegistry.moveToLocation(currentLocation,
+					temp = new Coordinate(currentLocation.x - 1, currentLocation.y), this)) {
+				currentLocation = temp;
 				facingDirection = Direction.WEST;
 				return true;
 			}
 		} else {
-			if (locationRegistry.moveToLocation(currentLocation, new Coordinate(currentLocation.getX(), currentLocation.getY() - 1), this)) {
-				currentLocation.setY(currentLocation.getY() - 1);
+			if (locationRegistry.moveToLocation(currentLocation,
+					temp = new Coordinate(currentLocation.x, currentLocation.y - 1), this)) {
+				currentLocation = temp;
 				facingDirection = Direction.SOUTH;
 				return true;
 			}

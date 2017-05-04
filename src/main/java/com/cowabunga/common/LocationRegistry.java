@@ -42,8 +42,7 @@ public class LocationRegistry {
 	 *         false - otherwise
 	 */
 	public boolean isLocationAvailable(Coordinate coordinate) {
-		if (coordinate.getX() < minX || coordinate.getX() > maxX || coordinate.getY() < minY
-				|| coordinate.getY() > maxY) {
+		if (coordinate.x < minX || coordinate.x > maxX || coordinate.y < minY || coordinate.y > maxY) {
 			return false;
 		}
 		return obstacleLocationMap.get(coordinate) == null;
