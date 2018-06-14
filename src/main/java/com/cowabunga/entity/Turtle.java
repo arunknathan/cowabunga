@@ -3,7 +3,7 @@ package com.cowabunga.entity;
 import com.cowabunga.common.Coordinate;
 import com.cowabunga.common.Direction;
 import com.cowabunga.common.LocationRegistry;
-import com.cowabunga.common.MoveStep;
+import com.cowabunga.common.Step;
 
 /**
  * Definition for a Turtle entity.
@@ -47,29 +47,29 @@ public class Turtle implements Entity {
 		this.currentLocation = currentLocation;
 	}
 
-	public synchronized boolean move(final MoveStep STEP) {
+	public synchronized boolean move(final Step STEP) {
 		Coordinate temp = null;
-		if ((STEP == MoveStep.FORWARD && facingDirection == Direction.NORTH)
-				|| (STEP == MoveStep.RIGHT && facingDirection == Direction.WEST)
-				|| (STEP == MoveStep.LEFT && facingDirection == Direction.EAST)) {
+		if ((STEP == Step.FORWARD && facingDirection == Direction.NORTH)
+				|| (STEP == Step.RIGHT && facingDirection == Direction.WEST)
+				|| (STEP == Step.LEFT && facingDirection == Direction.EAST)) {
 			if (locationRegistry.moveToLocation(currentLocation,
 					temp = new Coordinate(currentLocation.x, currentLocation.y + 1), this)) {
 				currentLocation = temp;
 				facingDirection = Direction.NORTH;
 				return true;
 			}
-		} else if ((STEP == MoveStep.FORWARD && facingDirection == Direction.EAST)
-				|| (STEP == MoveStep.RIGHT && facingDirection == Direction.NORTH)
-				|| (STEP == MoveStep.LEFT && facingDirection == Direction.SOUTH)) {
+		} else if ((STEP == Step.FORWARD && facingDirection == Direction.EAST)
+				|| (STEP == Step.RIGHT && facingDirection == Direction.NORTH)
+				|| (STEP == Step.LEFT && facingDirection == Direction.SOUTH)) {
 			if (locationRegistry.moveToLocation(currentLocation,
 					temp = new Coordinate(currentLocation.x + 1, currentLocation.y), this)) {
 				currentLocation = temp;
 				facingDirection = Direction.EAST;
 				return true;
 			}
-		} else if ((STEP == MoveStep.FORWARD && facingDirection == Direction.WEST)
-				|| (STEP == MoveStep.RIGHT && facingDirection == Direction.SOUTH)
-				|| (STEP == MoveStep.LEFT && facingDirection == Direction.NORTH)) {
+		} else if ((STEP == Step.FORWARD && facingDirection == Direction.WEST)
+				|| (STEP == Step.RIGHT && facingDirection == Direction.SOUTH)
+				|| (STEP == Step.LEFT && facingDirection == Direction.NORTH)) {
 			if (locationRegistry.moveToLocation(currentLocation,
 					temp = new Coordinate(currentLocation.x - 1, currentLocation.y), this)) {
 				currentLocation = temp;

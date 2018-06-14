@@ -9,7 +9,7 @@ import org.junit.runners.JUnit4;
 import com.cowabunga.common.Coordinate;
 import com.cowabunga.common.Direction;
 import com.cowabunga.common.LocationRegistry;
-import com.cowabunga.common.MoveStep;
+import com.cowabunga.common.Step;
 
 @RunWith(JUnit4.class)
 public class TurtleTest {
@@ -24,13 +24,13 @@ public class TurtleTest {
 		final Obstacle OBSTACLE = new Obstacle();
 		LOC_REG.takeLocation(new Coordinate(2, 2), OBSTACLE);
 
-		TURTLE.move(MoveStep.FORWARD);
-		TURTLE.move(MoveStep.RIGHT);
-		TURTLE.move(MoveStep.FORWARD);
-		TURTLE.move(MoveStep.RIGHT);
-		TURTLE.move(MoveStep.FORWARD);
-		TURTLE.move(MoveStep.LEFT);
-		TURTLE.move(MoveStep.FORWARD);
+		TURTLE.move(Step.FORWARD);
+		TURTLE.move(Step.RIGHT);
+		TURTLE.move(Step.FORWARD);
+		TURTLE.move(Step.RIGHT);
+		TURTLE.move(Step.FORWARD);
+		TURTLE.move(Step.LEFT);
+		TURTLE.move(Step.FORWARD);
 
 		if (!TURTLE.getCurrentLocation().equals(new Coordinate(3, 5))
 				|| !TURTLE.getFacingDirection().equals(Direction.NORTH)) {

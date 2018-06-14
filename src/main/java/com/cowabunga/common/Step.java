@@ -1,11 +1,11 @@
 package com.cowabunga.common;
 
-public enum MoveStep {
+public enum Step {
 	FORWARD('f'), LEFT('l'), RIGHT('r');
 
 	private final char step;
 
-	private MoveStep(char step) {
+	private Step(char step) {
 		this.step = step;
 	}
 
@@ -13,7 +13,7 @@ public enum MoveStep {
 		return step;
 	}
 
-	public static MoveStep toMoveStep(final char ch) {
+	public static Step get(final char ch) {
 		switch (ch) {
 		case 'l':
 			return LEFT;

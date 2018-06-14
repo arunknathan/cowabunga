@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 import com.cowabunga.common.LocationRegistry;
-import com.cowabunga.common.MoveStep;
+import com.cowabunga.common.Step;
 import com.cowabunga.entity.Turtle;
 import com.cowabunga.entity.util.TurtleUtil;
 
@@ -17,10 +17,10 @@ public class TurtleUtilImpl implements TurtleUtil {
 		boolean acceptableInput;
 		do {
 			inputCh = (char) BUF_RDR.read();
-			acceptableInput = (inputCh == MoveStep.FORWARD.getStepValue() || inputCh == MoveStep.LEFT.getStepValue()
-					|| inputCh == MoveStep.RIGHT.getStepValue());
+			acceptableInput = (inputCh == Step.FORWARD.getStepValue() || inputCh == Step.LEFT.getStepValue()
+					|| inputCh == Step.RIGHT.getStepValue());
 			if (acceptableInput) {
-				TURTLE.move(MoveStep.toMoveStep(inputCh));
+				TURTLE.move(Step.get(inputCh));
 			}
 		} while (acceptableInput);
 	}
