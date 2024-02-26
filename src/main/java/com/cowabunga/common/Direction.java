@@ -9,8 +9,4 @@ public enum Direction {
 		this.direction = direction;
 	}
 
-	public char getDirectionValue() {
-		return direction;
-	}
-
 }

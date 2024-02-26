@@ -4,6 +4,9 @@ build/
 .classpath
 .settings/
 
+# Ignore idea IDE related files
+.idea
+
 # Ignore Gradle GUI config
 gradle-app.setting
 
